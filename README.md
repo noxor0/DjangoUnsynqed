@@ -1,2 +1,2 @@
 # DjangoUnsynqed Project
-# at home hackathon, lets go
+at home hackathon, lets go
