@@ -1,7 +1,6 @@
 import boto3
 import json
 
-print('Loading function')
 dynamo = boto3.client('dynamodb')
 
 def respond(err, res=None):
@@ -15,6 +14,12 @@ def respond(err, res=None):
 
 
 def lambda_handler(event, context):
+    '''
+    Handles GET and PUT operations from API Gateway.
+    :param event: the body of the request
+    :param context: information on the lambda request
+    :returns: the dynamodb response after the operation.
+    '''
     operations = {
         'GET': lambda dynamo, x: dynamo.scan(**x),
         'PUT': lambda dynamo, x: dynamo.update_item(**x),

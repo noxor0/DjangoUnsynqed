@@ -1,22 +1,22 @@
 {% extends "about/header.html" %}
 {% block content %}
 <div class="span6">
-  <h5>Would you hire Connor?</h5>
-  <strong>Yes</strong><span class="pull-right">{{yes}}</span>
+  <h3><strong>Would you hire Connor?</strong></h3>
+  Yes<span class="pull-right">{{yes}}%</span>
   <div class="progress">
     <div class="progress-bar" role="progress" aria-valuenow="70"
     aria-valuemin="0" aria-valuemax="100" style="width:{{yes}}%">
     </div>
   </div>
   <p><a href="yes" class="btn btn-large btn-success">Vote Yes</a></p>
-  <strong>Maybe</strong><span class="pull-right">{{maybe}}</span>
+  Maybe<span class="pull-right">{{maybe}}%</span>
   <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="70"
     aria-valuemin="0" aria-valuemax="100" style="width:{{maybe}}%">
     </div>
   </div>
   <p><a href="maybe"  class="btn btn-large btn-success">Vote Maybe</a></p>
-  <strong>No</strong><span class="pull-right">{{no}}</span>
+  No<span class="pull-right">{{no}}%</span>
   <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="70"
     aria-valuemin="0" aria-valuemax="100" style="width:{{no}}%">

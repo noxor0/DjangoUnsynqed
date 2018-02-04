@@ -6,8 +6,8 @@ def poll(request):
     return render(request, 'poll/poll_page.html', poll_values)
 
 def poll_response(request, response):
-    success = models.put_vote_aws(response)
-    return render(request, 'poll/poll_response.html', {'response': success})
+    response_dict = models.put_vote_aws(response)
+    return render(request, 'poll/poll_response.html', response_dict)
 
 # '''
 # I'm fairly sure theres a cleaner way to do this, but i dont know how to take
