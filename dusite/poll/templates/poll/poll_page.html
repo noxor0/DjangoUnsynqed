@@ -8,20 +8,20 @@
     aria-valuemin="0" aria-valuemax="100" style="width:{{yes}}%">
     </div>
   </div>
-  <p><a onclick="history.go(0)" class="btn btn-large btn-success">Vote Yes</a></p>
+  <p><a href="?vote=yes" class="btn btn-large btn-success">Vote Yes</a></p>
   <strong>Maybe</strong><span class="pull-right">{{maybe}}</span>
   <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="70"
     aria-valuemin="0" aria-valuemax="100" style="width:{{maybe}}%">
     </div>
   </div>
-  <p><a onclick="history.go(0)"  class="btn btn-large btn-success">Vote Maybe</a></p>
+  <p><a href="?vote=maybe"  class="btn btn-large btn-success">Vote Maybe</a></p>
   <strong>No</strong><span class="pull-right">{{no}}</span>
   <div class="progress">
     <div class="progress-bar" role="progressbar" aria-valuenow="70"
     aria-valuemin="0" aria-valuemax="100" style="width:{{no}}%">
     </div>
   </div>
-  <p><a onclick="history.go(0)" class="btn btn-large btn-success">Vote No</a></p>
+  <p><a href="/poll/no" class="btn btn-large btn-success">Vote No</a></p>
 </div>
 {% endblock %}
