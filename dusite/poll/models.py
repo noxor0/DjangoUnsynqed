@@ -8,6 +8,8 @@ aws_url = 'https://umwvdt8m7i.execute-api.us-west-2.amazonaws.com/prod/poll_hand
 def get_counts_aws():
     '''
     Queries the GET API that scans the table for the count of the responses.
+    If aws get query fails, all bars will just be full. For the purpose of this
+    project, handling it this way should be fine.
     :return: A dictionary that includes the counts of each response and total.
     '''
     query_params = '?TableName=poll_table'
@@ -15,10 +17,16 @@ def get_counts_aws():
     dynamo_return = json.loads(r.text)
     return_dict = {}
     total = 0
+    if dynamo_return['ResponseMetadata']['HTTPStatusCode'] != 200:
+        return_dict['total'] = 1
+        for item in ['yes', 'no', maybe]:
+            return_dict[item] = 1
+
     for item in dynamo_return['Items']:
         return_dict[item['option']['S']] = int(item['count']['N'])
         total += int(item['count']['N'])
     return_dict['total'] = total
+
     return return_dict
 
 def get_poll_values():
@@ -43,7 +51,7 @@ def put_vote_aws(response):
     Requests will add one to the count through the PUT API on AWS.
     Have some simple error handling if response code isnt 200. Will handle the
     exception gracefully on the frontend with an error message.
-    
+
     :param response: the response selected by the user to be incremented by 1
     :returns: A dictionary with a the accept response that was returned from AWS,
     and flavor text for delivery.
