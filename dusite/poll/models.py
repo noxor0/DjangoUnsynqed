@@ -2,25 +2,12 @@ from django.db import models
 import requests
 import json
 
-'''
-{
-    "TableName":"poll_table",
-    "Key":{"option": {"S": "yes"}},
-    "AttributeUpdates" : {
-        "count": {
-            "Action": "ADD",
-            "Value": {"N":"1"}
-        }
-
-    }
-}
-
-'''
+#Extract this?
+aws_url = 'https://umwvdt8m7i.execute-api.us-west-2.amazonaws.com/prod/poll_handler'
 
 def get_counts_aws():
-    # Should call api gateway url here
-    r = requests.get('https://umwvdt8m7i.execute-api.us-west-2.amazonaws.com/prod/poll_handler?TableName=poll_table')
-    # get the values from the DB
+    query_params = '?TableName=poll_table'
+    r = requests.get(aws_url + query_params)
     dynamo_return = json.loads(r.text)
     return_dict = {}
     total = 0
@@ -38,3 +25,21 @@ def get_poll_values():
         if key is not 'total':
             percent_dict[key] = int(counts_dict[key] / counts_dict['total'] * 100)
     return percent_dict
+
+def put_vote_aws(response):
+    body_dict = {
+        "TableName":"poll_table",
+        "Key":{"option": {"S": response}},
+        "AttributeUpdates" : {
+            "count": {
+                "Action": "ADD",
+                "Value": {"N":"1"}
+            }
+        }
+    }
+
+    r = requests.put(aws_url, data=json.dumps(body_dict))
+
+    response_json = json.loads(r.text)
+    success = response if response_json['ResponseMetadata']['HTTPStatusCode'] == 200 else "Something went wrong!"
+    return success
