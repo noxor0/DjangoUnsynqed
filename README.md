@@ -9,7 +9,7 @@ Requires an environment file that contains all secrets.
 
 To deploy:
 ```
-# docker run --env-file=<environment_file> -p 8000:8000 noxor0/djangounsynqed:latest
+sudo docker run --env-file=<environment_file> -p 8000:8000 noxor0/djangounsynqed:latest
 ```
 
 Will deploy the application and it will be accessible at
