@@ -3,4 +3,4 @@ ADD . /dusite
 WORKDIR /dusite
 RUN pip install -r requirements.txt
 EXPOSE 8000
-CMD ["./docker_entrypoint.sh"]
+CMD ["./docker-entrypoint.sh"]
