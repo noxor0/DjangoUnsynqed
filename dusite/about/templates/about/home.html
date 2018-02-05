@@ -1,7 +1,7 @@
 {% extends "about/header.html" %}
 {% block content %}
 <h3>Overview</h3>
-<p>Hey! This is a project to demonstrate my abilities as a developer!</p>
+<p>This is a project to demonstrate my abilities as a developer.</p>
 <p>I built the website using Django and Bootstrap for model/view, AWS for the database, and Docker for deployment.</p>
 <p>AWS components consist of a API Gateway endpoint for GET/PUT, Lambda to handle the requests and pass body to a dynamoDB table for static storage. Will add a cloudformation template soon.</p>
 <p>Deployment is a public docker image that requires an environment variable file that includes secret values and resource URLs. Supports both docker-compose and docker run with a entrypoint script.</p>

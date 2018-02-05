@@ -1,9 +1,11 @@
 from django.db import models
 import requests
 import json
+import os
 
 #Extract this?
-aws_url = 'https://umwvdt8m7i.execute-api.us-west-2.amazonaws.com/prod/poll_handler'
+aws_url = os.environ['AWSURL']
+header = {'x-api-key': os.environ['AWSAPIKEY']}
 
 def get_counts_aws():
     '''
@@ -13,7 +15,7 @@ def get_counts_aws():
     :return: A dictionary that includes the counts of each response and total.
     '''
     query_params = '?TableName=poll_table'
-    r = requests.get(aws_url + query_params)
+    r = requests.get(aws_url + query_params, headers=header)
     dynamo_return = json.loads(r.text)
     return_dict = {}
     total = 0
@@ -74,7 +76,7 @@ def put_vote_aws(response):
         }
     }
 
-    r = requests.put(aws_url, data=json.dumps(body_dict))
+    r = requests.put(aws_url, data=json.dumps(body_dict), headers=header)
     response_json = json.loads(r.text)
 
     if response_json['ResponseMetadata']['HTTPStatusCode'] == 200:
