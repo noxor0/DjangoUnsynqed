@@ -1,5 +1,5 @@
-# DjangoUnsynqed Project
-DjangoUnsqyned was a project to showcase my abilities as a developer. It includes information and qualifications about myself, and a poll system that uses a shared cloud database to synchronize the results between all instances. 
+# DjangoUnsynqed
+DjangoUnsqyned is a project to showcase my abilities as a developer. It includes information and qualifications about myself and a polling system that uses a shared cloud database to synchronize the results between all instances. 
 
 
 ## Deployment
