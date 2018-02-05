@@ -15,19 +15,22 @@ def respond(err, res=None):
 
 def lambda_handler(event, context):
     '''
-    Handles GET and PUT operations from API Gateway.
+    Handles GET and PUT methods from API Gateway.
     :param event: the body of the request
     :param context: information on the lambda request
-    :returns: the dynamodb response after the operation.
+    :returns: the dynamodb response after the method.
     '''
-    operations = {
+    methods = {
         'GET': lambda dynamo, x: dynamo.scan(**x),
         'PUT': lambda dynamo, x: dynamo.update_item(**x),
     }
 
-    operation = event['httpMethod']
-    if operation in operations:
-        payload = event['queryStringParameters'] if operation == 'GET' else json.loads(event['body'])
-        return respond(None, operations[operation](dynamo, payload))
+    methods = event['httpMethod']
+    if method in methods:
+        if method == 'GET':
+            payload = event['queryStringParameters']
+        else:
+            json.loads(event['body'])
+        return respond(None, methods[method](dynamo, payload))
     else:
-        return respond(ValueError('Unsupported method "{}"'.format(operation)))
+        return respond(ValueError('Unsupported method "{}"'.format(method)))
